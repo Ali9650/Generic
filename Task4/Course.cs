@@ -7,37 +7,33 @@ namespace Task4
 
         public void AddStudent(Student newStudent)
         {
-            if (students.Exists(s => s.PIN == newStudent.PIN))
-            {
-                Console.WriteLine("A student with the same PIN already exists. Student not added.");
-                return;
-            }
-
             students.Add(newStudent);
-            Console.WriteLine("Student added successfully.");
+            Messages.SuccesMessage ("Student");
         }
+
+        public void DisplayAllStudents()
+        { 
+            foreach (var student in students)
+            {
+                Console.WriteLine(student);
+            }
+        }
+
 
         public void RemoveStudent(string pinToRemove)
         {
+            DisplayAllStudents();
             int removed = students.RemoveAll(s => s.PIN == pinToRemove);
             if (removed > 0)
             {
-                Console.WriteLine("Student removed successfully.");
+                Messages.SuccesDeleteMessage("Student");
             }
             else
-            {
-                Console.WriteLine("No student found with the provided PIN.");
-            }
+                Messages.NotFoundMessage("PIN");
+             
+            
         }
 
-        public void DisplayStudents()
-        {
-            Console.WriteLine("List of students:");
-            foreach (var student in students)
-            {
-                Console.WriteLine($"Name: {student.Name}, Surname: {student.Surname}, Age: {student.Age}, PIN: {student.PIN}");
-            }
-        }
 
         public void SearchStudent(string pinToSearch)
         {
@@ -47,10 +43,16 @@ namespace Task4
                 Console.WriteLine($"Name: {student.Name}, Surname: {student.Surname}, Age: {student.Age}, PIN: {student.PIN}");
             }
             else
-            {
-                Console.WriteLine("No student found with the provided PIN.");
-            }
+                Messages.NotFoundMessage("PIN");
+               
+            
         }
+
+        public int CountTotalStudents()
+        {
+            return students.Count;
+        }
+
 
         public int CountStudentsAbove18()
         {

@@ -10,12 +10,12 @@ namespace Task3
         {
             if (groups.Exists(g => g.Name == name))
             {
-                Console.WriteLine($"A group with name '{name}' already exists. Cannot add duplicate groups.");
+                Console.WriteLine("Bu qrup artiq movcuddur");
             }
             else
             {
                 groups.Add(new Group(name));
-                Console.WriteLine($"Group '{name}' added successfully.");
+                Console.WriteLine("Group elave edildi");
             }
 
         }

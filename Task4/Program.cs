@@ -1,47 +1,61 @@
-﻿namespace Task4
+﻿using System.Globalization;
+
+namespace Task4
 {
     internal class Program
     {
         static void Main(string[] args)
         {
             Course course = new Course();
-            int choice;
-            do
-            {
-                Console.WriteLine("1. Add a new student");
-                Console.WriteLine("2. Remove a student");
-                Console.WriteLine("3. Display all students");
-                Console.WriteLine("4. Search for a student");
-                Console.WriteLine("5. Count total students");
-                Console.WriteLine("6. Exit");
-                Console.Write("Enter your choice: ");
-                choice = Convert.ToInt32(Console.ReadLine());
 
-                switch (choice)
+            while (true)
+            {
+                            
+                    Console.WriteLine("---MENU----");
+                    Console.WriteLine("1.Add Student");
+                    Console.WriteLine("2. Remove Student");
+                    Console.WriteLine("3. Diplay All Students");
+                    Console.WriteLine("4. Search Student");
+                    Console.WriteLine("5. Count Total Student");
+                    Console.WriteLine("6. Count Students Above18 ");
+
+                string choiceInput = (Console.ReadLine());
+                int choice;
+                bool isSucceeded = int.TryParse(choiceInput, out choice);
+                if (isSucceeded)
                 {
-                    case 1:
+                    switch ((Operations)choice)
+                {
+                    case Operations.AddStudent:
                         AddStudent(course);
                         break;
-                    case 2:
+                    case Operations.RemoveStudent:
                         RemoveStudent(course);
                         break;
-                    case 3:
-                        course.DisplayStudents();
+                    case Operations.DisplayAllStudents:
+                        course.DisplayAllStudents();
                         break;
-                    case 4:
+                    case Operations.SearchStudent:
                         SearchStudent(course);
                         break;
-                    case 5:
-                        Console.WriteLine($"Number of students above 18 years old: {course.CountStudentsAbove18()}");
+                    case Operations.CountTotalStudent:
+                        course.CountTotalStudents();    
                         break;
-                    case 6:
-                        Console.WriteLine("Exiting program...");
+                    case Operations.CountStudentsAbove18:
+                        course.CountStudentsAbove18();
                         break;
                     default:
-                        Console.WriteLine("Invalid choice. Please enter a valid option.");
+                       Messages.InvalidInputMessage("Choice");
                         break;
+                    }
                 }
-            } while (choice != 6);
+                else
+                {
+                    Messages.InvalidInputMessage("Choice");
+                }
+
+            }
+
         }
 
         static void AddStudent(Course course)

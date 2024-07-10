@@ -8,5 +8,7 @@ namespace Task4
         public string Surname { get; set; }
         public int Age { get; set; }
         public string PIN { get; set; }
+       
+       
     }
 }
